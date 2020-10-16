@@ -40,5 +40,4 @@ $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
 
 #Cleanup
-Remove-Item -Path.\GetInfo.ps1
-Remove-Item -path $filename
+Remove-Item -Path .\GetInfo.ps1
