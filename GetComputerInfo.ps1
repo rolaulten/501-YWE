@@ -29,10 +29,13 @@ $Contents =  Write-Output $Report | Select-Object -Property *
 Export-Csv -InputObject $Contents -Path $filename -NoTypeInformation
 
 #send data to remote folder for further processing - this section does not work
-$UploadPath = "https://501commons-my.sharepoint.com/:f:/g/personal/dorian_501commons_org/EsSv-onMsIRMpcPwGZsp7bkBbYF6YXMIZVNVFF63uMwIqg?e=5sUANg"
-Invoke-WebRequest -Uri $UploadPath -Method Post -InFile $filename #-ContentType 'text/plain'
+
+$client = New-Object System.Net.WebClient
+$client.Credentials = New-Object System.Net.NetworkCredential("501commons", "Welcome1")
+$FTPpath = "ftp://wachobbers.duckdns.org/$csvname.csv"
+$client.UploadFile("ftp://192.168.1.32/$csvname.csv", "$csvname.csv")
 
 
 #Cleanup
-#Remove-Item -Path .\GetComputerInfo.ps1
+Remove-Item -Path .\GetComputerInfo.ps1
 Remove-Item -path $filename
