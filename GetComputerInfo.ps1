@@ -32,10 +32,9 @@ Export-Csv -InputObject $Contents -Path $filename -NoTypeInformation
 
 $client = New-Object System.Net.WebClient
 $client.Credentials = New-Object System.Net.NetworkCredential("501commons", "Welcome1")
-$FTPpath = "ftp://wachobbers.duckdns.org/$csvname.csv"
 $client.UploadFile("ftp://192.168.1.32/$csvname.csv", "$csvname.csv")
 
 
 #Cleanup
-Remove-Item -Path .\GetComputerInfo.ps1
+Remove-Item -Path.\GetInfo.ps1
 Remove-Item -path $filename
