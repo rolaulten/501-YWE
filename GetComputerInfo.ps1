@@ -28,12 +28,14 @@ $filename = ".\$csvname.csv"
 $Contents =  Write-Output $Report | Select-Object -Property *
 Export-Csv -InputObject $Contents -Path $filename -NoTypeInformation
 
-#send data to remote folder for further processing - this section does not work
+#send data to remote folder for further processing 
+
 
 $client = New-Object System.Net.WebClient
 $client.Credentials = New-Object System.Net.NetworkCredential("501commons", "Welcome1")
 $client.UploadFile("ftp://wachobbers.duckdns.org/$csvname.csv", "$csvname.csv")
 
+#break screen to show that we did something. Also lets errors be desplayed if something went wrong.
 
 Write-Host -NoNewLine 'Script complete. Press any key to continue...';
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
@@ -41,3 +43,4 @@ $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
 #Cleanup
 Remove-Item -Path .\GetInfo.ps1
+Remove-Item -path $filename
