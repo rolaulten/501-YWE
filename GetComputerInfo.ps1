@@ -35,10 +35,10 @@ $client.Credentials = New-Object System.Net.NetworkCredential("501commons", "Wel
 $client.UploadFile("ftp://192.168.1.32/$csvname.csv", "$csvname.csv")
 
 
-#Cleanup
-Remove-Item -Path.\GetInfo.ps1
-Remove-Item -path $filename
-
 Write-Host -NoNewLine 'Script complete. Press any key to continue...';
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
+
+#Cleanup
+Remove-Item -Path.\GetInfo.ps1
+Remove-Item -path $filename
