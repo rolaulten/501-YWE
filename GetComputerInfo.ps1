@@ -32,7 +32,7 @@ Export-Csv -InputObject $Contents -Path $filename -NoTypeInformation
 
 $client = New-Object System.Net.WebClient
 $client.Credentials = New-Object System.Net.NetworkCredential("501commons", "Welcome1")
-$client.UploadFile("ftp://192.168.1.32/$csvname.csv", "$csvname.csv")
+$client.UploadFile("ftp://wachobbers.duckdns.org/$csvname.csv", "$csvname.csv")
 
 
 Write-Host -NoNewLine 'Script complete. Press any key to continue...';
