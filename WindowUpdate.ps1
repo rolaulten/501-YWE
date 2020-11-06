@@ -21,3 +21,6 @@ $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "powershel
 
 #Install all the updates
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+
+
+##Test for git updates
