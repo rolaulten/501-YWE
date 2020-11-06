@@ -51,3 +51,5 @@ UserCreate('YWEUser','SomePassword') #Create local user account
 
 #Install all Windows Updates - note this will restart the computer if needed. 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+
+#test
