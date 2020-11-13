@@ -37,6 +37,10 @@ Write-Host "Automation is in play. Now installing office"
 #Install office
 Start-Process .\office\setup.exe -wait
 
+
 #Install all Windows Updates - note this will restart the computer if needed. 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoRebo
+
+Write-Host -NoNewLine 'Script complete. Press any key to continue...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
