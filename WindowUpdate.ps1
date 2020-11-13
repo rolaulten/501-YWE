@@ -33,7 +33,6 @@ $ChocoTrigger = New-ScheduledTaskTrigger -At 3:00PM -Weekly -DaysOfWeek Tuesday
 $ChocoAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-command {choco upgrade all -y}"
 Register-ScheduledTask -Action $ChocoAction -Trigger $ChocoTrigger -TaskName $ChocoTaskName
 
-#Write-Host "Automation is in play. Now installing office"
 #Install office
 #Start-Process .\office\setup.exe -wait
 
