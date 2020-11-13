@@ -33,21 +33,9 @@ $ChocoTrigger = New-ScheduledTaskTrigger -At 3:00PM -Weekly -DaysOfWeek Tuesday
 $ChocoAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-command {choco upgrade all -y}"
 Register-ScheduledTask -Action $ChocoAction -Trigger $ChocoTrigger -TaskName $ChocoTaskName
 
-#######Create/manage local user acconts
+#Install office
 
-#Disable all current accounts
-Get-LocalUser | Disable-LocalUser
-
-#Function as we will be createing muliple accounts
-function UserCreate ($Username,$Password) {
-    $SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
-    New-LocalUser -Name $Username -Password $SecurePassword
-}
-   
-UserCreate('YWEAdmin','SomePassword') #CreateAdmin Account
-Add-LocalGroupMember -Group 'Administrators' -Member 'YWEAdmin'
-
-UserCreate('YWEUser','SomePassword') #Create local user account
+.\Office\setup.exe
 
 #Install all Windows Updates - note this will restart the computer if needed. 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
