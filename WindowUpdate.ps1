@@ -34,8 +34,7 @@ $ChocoAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-com
 Register-ScheduledTask -Action $ChocoAction -Trigger $ChocoTrigger -TaskName $ChocoTaskName
 
 #Install office
-
-.\Office\setup.exe
+Start-Process .\office\setup.exe -wait
 
 #Install all Windows Updates - note this will restart the computer if needed. 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
