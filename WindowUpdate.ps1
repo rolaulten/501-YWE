@@ -37,4 +37,6 @@ Register-ScheduledTask -Action $ChocoAction -Trigger $ChocoTrigger -TaskName $Ch
 Start-Process .\office\setup.exe -wait
 
 #Install all Windows Updates - note this will restart the computer if needed. 
-Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoRebo
+
+tes
