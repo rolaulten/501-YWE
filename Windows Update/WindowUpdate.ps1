@@ -19,20 +19,6 @@ $WinAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-comma
 Register-ScheduledTask -Action $WinAction -Trigger $WinTrigger -TaskName $WinTaskname
 
 
-#Instlal Choco for app updates - see https://chocolatey.org/docs/installation
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
-#Install standard apps - this may be updated as needed
-choco install firefox -y
-choco install googlechrome -y
-choco install adobereader -params '"/DesktopIcon /UpdateMode:0"' -y
-
-#Create task for weekly app updates 
-$ChocoTaskName = "Weekly App Update"
-$ChocoTrigger = New-ScheduledTaskTrigger -At 3:00PM -Weekly -DaysOfWeek Tuesday
-$ChocoAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-command {choco upgrade all -y}"
-Register-ScheduledTask -Action $ChocoAction -Trigger $ChocoTrigger -TaskName $ChocoTaskName
-
 #Install office
 Start-Process .\office\setup.exe -wait
 
