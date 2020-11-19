@@ -19,6 +19,12 @@ $WinAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-comma
 Register-ScheduledTask -Action $WinAction -Trigger $WinTrigger -TaskName $WinTaskname
 
 #Install Chrome
+& $PSScriptRoot/InstallScripts/Chromeinstall.ps1
+#Install Firefox
+& $PSScriptRoot/InstallScripts/FirefoxInstall.ps1
+#Install Adobe
+& $PSScriptRoot/InstallScripts/AdobeInstall.ps1
+
 #Install office
 Start-Process .\office\setup.exe -wait
 

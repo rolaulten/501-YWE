@@ -2,7 +2,7 @@
 # https://get.adobe.com/nl/reader/enterprise/
 
 # Path for the workdir
-$workdir = "c:\installer\"
+$workdir = "$ENV:Temp\Adobe"
 
 # Check if work directory exists if not create it
 
