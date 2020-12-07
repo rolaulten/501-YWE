@@ -33,7 +33,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install firefox -y
 choco install googlechrome -y
-choco install adobereader -params '"/DesktopIcon /UpdateMode:0"' -y
+choco install adobereader -params ''/DesktopIcon /UpdateMode:0'' -y
 
 Get-LocalUser | Disable-LocalUser  
 & $PSScriptRoot/InstallScripts/UserAdd.ps1
