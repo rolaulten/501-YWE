@@ -2,7 +2,7 @@
 # https://get.adobe.com/nl/reader/enterprise/
 
 # Path for the workdir
-$workdir = "$ENV:Temp\Adobe"
+$workdir = "c:\installer\"
 
 # Check if work directory exists if not create it
 
@@ -12,20 +12,22 @@ ELSE
 { New-Item -Path $workdir  -ItemType directory }
 
 # Download the installer
-If (Test-Path "$workdir\adobeDC.exe" -ne true) {
-    $source = "http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/1502320053/AcroRdrDC1502320053_en_US.exe"
-    $destination = "$workdir\adobeDC.exe"
-    
-    # Check if Invoke-Webrequest exists otherwise execute WebClient
 
-    if (Get-Command 'Invoke-Webrequest') {
-        Invoke-WebRequest $source -OutFile $destination
-    }
-    else {
-        $WebClient = New-Object System.Net.WebClient
-        $webclient.DownloadFile($source, $destination)
-    }
+$source = "http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/1502320053/AcroRdrDC1502320053_en_US.exe"
+$destination = "$workdir\adobeDC.exe"
+
+# Check if Invoke-Webrequest exists otherwise execute WebClient
+
+if (Get-Command 'Invoke-Webrequest')
+{
+     Invoke-WebRequest $source -OutFile $destination
 }
+else
+{
+    $WebClient = New-Object System.Net.WebClient
+    $webclient.DownloadFile($source, $destination)
+}
+
 # Start the installation
 
 Start-Process -FilePath "$workdir\adobeDC.exe" -ArgumentList "/sPB /rs"
@@ -33,3 +35,7 @@ Start-Process -FilePath "$workdir\adobeDC.exe" -ArgumentList "/sPB /rs"
 # Wait XX Seconds for the installation to finish
 
 Start-Sleep -s 35
+
+# Remove the installer
+
+rm -Force $workdir\adobe*

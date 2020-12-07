@@ -18,16 +18,25 @@ $WinTrigger = New-ScheduledTaskTrigger -At 3:00PM -Weekly -DaysOfWeek Wednesday
 $WinAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-command {Install-WindowsUpdate -MicrosoftUpdate -AcceptAll}"
 Register-ScheduledTask -Action $WinAction -Trigger $WinTrigger -TaskName $WinTaskname
 
-#Install Chrome
-& $PSScriptRoot/InstallScripts/Chromeinstall.ps1
-#Install Firefox
-& $PSScriptRoot/InstallScripts/FirefoxInstall.ps1
-#Install Adobe
-& $PSScriptRoot/InstallScripts/AdobeInstall.ps1
+# #Install Chrome - Removing this install methid in faovr of choco. Scritps are still in place if errors occure
+# & $PSScriptRoot/InstallScripts/Chromeinstall.ps1
+# #Install Firefox
+# & $PSScriptRoot/InstallScripts/FirefoxInstall.ps1
+# #Install Adobe
+# & $PSScriptRoot/InstallScripts/AdobeInstall.ps1
 
-#Install office
-Start-Process .\office\setup.exe -wait
+# #Install office
+# Start-Process .\office\setup.exe -wait
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
+# Use choco to install adobe reader, chrome, firefox
+
+choco install firefox -y
+choco install googlechrome -y
+choco install adobereader -params '"/DesktopIcon /UpdateMode:0"' -y
+
+Get-LocalUser | Disable-LocalUser  
+& $PSScriptRoot/InstallScripts/UserAdd.ps1
 
 #Install all Windows Updates - note this will restart the computer if needed. 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoRebo
